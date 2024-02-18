@@ -32,6 +32,7 @@ async function getChatCompletions(
   setLoadingChat(false);
   if (!response.ok) {
     console.error(`Error: ${response.statusText}`);
+    return `Error: ${response.statusText}`;
   } else {
     const data = await response.json();
     // Extract the assistant's message content from the response data
@@ -96,6 +97,7 @@ function App() {
   };
 
   const saveApiKey = (key: string) => {
+    if (!key.trim()) return;
     localStorage.setItem("transcribeTransformApiKey", key);
   };
 
@@ -130,6 +132,7 @@ function App() {
 
     if (!response.ok) {
       console.error(`Error: ${response.statusText}`);
+      setResponseText(`Error: ${response.statusText}`);
     } else {
       const data = await response.json();
       setResponseText(data.text); // Update the response text with the text from the response
@@ -170,12 +173,12 @@ function App() {
         className="card"
         style={{ display: "flex", flexDirection: "column", gap: "4px" }}
       >
-        <button onClick={() => setModalIsOpen(true)}>
+        <button onClick={() => setModalIsOpen(!modalIsOpen)}>
           Edit OpenAI API Key {apiKey ? "(found one)" : ""}
         </button>
         {modalIsOpen && (
           <div className="modal">
-            <h2>Enter OpenAI API Key</h2>
+            <h5>Enter OpenAI API Key</h5>
             <input type="text" onChange={(e) => setApiKey(e.target.value)} />
             <button onClick={() => saveApiKey(apiKey)}>Save</button>
           </div>
