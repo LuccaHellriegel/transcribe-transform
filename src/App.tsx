@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import "./App.css";
 
+const defaultSummaryPrompt =
+  "You are a pro-summarizer and will summarize every transcript that you get. Only ever include your summary. Never add any comments.";
+
 async function getChatCompletions(
   key: string,
   system: string,
@@ -53,8 +56,7 @@ function App() {
   const [loadingChat, setLoadingChat] = useState(false); // Added separate loading state for chat completions
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [chatContent, setChatContent] = useState(
-    localStorage.getItem("systemPrompt") ||
-      "You are a pro-summarizer and will summarize every transcript that you get."
+    localStorage.getItem("systemPrompt") || defaultSummaryPrompt
   );
   const [chatResponse, setChatResponse] = useState("-");
   const audioRecorder = useRef<MediaRecorder | null>(null);
@@ -158,13 +160,8 @@ function App() {
   };
 
   const resetSystemPrompt = () => {
-    setChatContent(
-      "You are a pro-summarizer and will summarize every transcript that you get."
-    );
-    localStorage.setItem(
-      "systemPrompt",
-      "You are a pro-summarizer and will summarize every transcript that you get."
-    );
+    setChatContent(defaultSummaryPrompt);
+    localStorage.setItem("systemPrompt", defaultSummaryPrompt);
   };
 
   return (
