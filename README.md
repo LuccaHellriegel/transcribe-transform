@@ -6,6 +6,7 @@ Ultra lazy version. Shocked that this does not exist.
 
 Ideas:
 
+- proper audio device choice
 - download recording
 - make recording-sessions differentiation and save stuff in indexedDB
 - somehow make this easier to import in LogSeq
