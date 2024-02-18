@@ -1,5 +1,7 @@
 Record from your browser and immediately transform the transcript into something useful.
 
+Check it out: https://luccahellriegel.github.io/transcribe-transform/dist/
+
 Local only. Nothing leaves the browser, except sending your API key and recording to OpenAI.
 
 Ultra lazy version. Shocked that this does not exist.
